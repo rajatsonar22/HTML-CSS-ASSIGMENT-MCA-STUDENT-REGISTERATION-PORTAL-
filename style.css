@@ -1,0 +1,376 @@
+
+/* ------------------------------
+   1. Basic page styling
+------------------------------ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+/* ------------------------------
+   2. Header
+------------------------------ */
+
+.header {
+    background: linear-gradient(135deg, #1d4ed8, #4338ca);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+.header h1 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: #e0e7ff;
+}
+
+/* ------------------------------
+   3. Main content and cards
+------------------------------ */
+
+.container {
+    width: min(1150px, 94%);
+    margin: 30px auto;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.07);
+    min-width: 0;
+}
+
+.card h2 {
+    color: #1e3a8a;
+    margin-bottom: 5px;
+    font-size: 1.5rem;
+}
+
+.subtitle {
+    color: #64748b;
+    margin-bottom: 22px;
+}
+
+.section-heading {
+    margin: 25px 0 15px;
+    color: #334155;
+    font-size: 1.1rem;
+}
+
+/* ------------------------------
+   4. Form layout
+------------------------------ */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 0.94rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    font-size: 1rem;
+    background: #fff;
+    color: #1e293b;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.13);
+}
+
+.form-group input:invalid:not(:placeholder-shown) {
+    border-color: #dc2626;
+}
+
+.help-text {
+    margin-top: 15px;
+    color: #64748b;
+    font-size: 0.88rem;
+}
+
+/* ------------------------------
+   5. Buttons
+------------------------------ */
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.btn {
+    border: none;
+    border-radius: 7px;
+    padding: 11px 17px;
+    font-size: 0.94rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 2px;
+}
+
+.btn-primary {
+    background: #2563eb;
+    color: white;
+}
+
+.btn-secondary {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.btn-danger {
+    background: #dc2626;
+    color: white;
+}
+
+/* ------------------------------
+   6. Form messages
+------------------------------ */
+
+.message {
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+.message:empty {
+    display: none;
+}
+
+.message.error {
+    color: #dc2626;
+}
+
+.message.success {
+    color: #15803d;
+}
+
+/* ------------------------------
+   7. Result section
+------------------------------ */
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.result-item {
+    padding: 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 9px;
+    overflow-wrap: anywhere;
+}
+
+.result-item span {
+    display: block;
+    color: #64748b;
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+}
+
+.result-item strong {
+    font-size: 1.1rem;
+}
+
+.pass {
+    color: #15803d !important;
+}
+
+.fail {
+    color: #dc2626 !important;
+}
+
+.json-output {
+    background: #0f172a;
+    color: #bbf7d0;
+    padding: 18px;
+    border-radius: 8px;
+    margin: 15px 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    overflow-x: auto;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 0.88rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* ------------------------------
+   8. Student records table
+------------------------------ */
+
+.table-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+    min-width: 750px;
+    border-collapse: collapse;
+    background: white;
+}
+
+th,
+td {
+    padding: 13px 14px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+}
+
+th {
+    background: #eff6ff;
+    color: #1e3a8a;
+    white-space: nowrap;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.small-delete {
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 7px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.empty-message {
+    color: #64748b;
+    text-align: center;
+    padding: 22px 10px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* ------------------------------
+   9. Footer
+------------------------------ */
+
+.footer {
+    background: #0f172a;
+    color: #cbd5e1;
+    text-align: center;
+    padding: 22px;
+    font-size: 0.9rem;
+}
+
+/* ------------------------------
+   10. Responsive design
+------------------------------ */
+
+@media (max-width: 700px) {
+    .container {
+        width: 94%;
+        margin: 18px auto;
+    }
+
+    .card {
+        padding: 18px;
+        border-radius: 10px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .result-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .button-group .btn {
+        width: 100%;
+    }
+
+    .table-heading {
+        align-items: stretch;
+    }
+
+    .table-heading .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 380px) {
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        padding: 25px 12px;
+    }
+
+    .card {
+        padding: 14px;
+    }
+}

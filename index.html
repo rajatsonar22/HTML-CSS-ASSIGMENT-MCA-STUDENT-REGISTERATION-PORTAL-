@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Registration & Result Management</title>
+
+    <!-- Connect the CSS file -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Connect the JavaScript file after HTML is loaded -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <header class="header">
+        <h1>Student Registration System</h1>
+        <p>Register students, calculate marks, and manage results</p>
+    </header>
+
+    <main class="container">
+
+        <!-- Student registration form -->
+        <section class="card">
+            <h2>Student Registration</h2>
+            <p class="subtitle">Enter student details and marks out of 100.</p>
+
+            <form id="studentForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter full name"
+                            minlength="2"
+                            maxlength="80"
+                            pattern="[A-Za-z][A-Za-z .'-]*"
+                            title="Use letters, spaces, apostrophes, dots, or hyphens."
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="roll">Roll Number *</label>
+                        <input
+                            type="text"
+                            id="roll"
+                            name="roll"
+                            placeholder="e.g. STU101"
+                            minlength="1"
+                            maxlength="20"
+                            pattern="[A-Za-z0-9_-]+"
+                            title="Use letters, numbers, hyphens, or underscores."
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="studentClass">Class / Course *</label>
+                        <input
+                            type="text"
+                            id="studentClass"
+                            name="studentClass"
+                            placeholder="e.g. BCA First Year"
+                            maxlength="60"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="student@example.com"
+                            maxlength="120"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <h3 class="section-heading">Subject Marks</h3>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="english">English (out of 100) *</label>
+                        <input type="number" id="english" name="english"
+                               min="0" max="100" step="1"
+                               placeholder="0 - 100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="maths">Mathematics (out of 100) *</label>
+                        <input type="number" id="maths" name="maths"
+                               min="0" max="100" step="1"
+                               placeholder="0 - 100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="science">Science (out of 100) *</label>
+                        <input type="number" id="science" name="science"
+                               min="0" max="100" step="1"
+                               placeholder="0 - 100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="computer">Computer (out of 100) *</label>
+                        <input type="number" id="computer" name="computer"
+                               min="0" max="100" step="1"
+                               placeholder="0 - 100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="history">History (out of 100) *</label>
+                        <input type="number" id="history" name="history"
+                               min="0" max="100" step="1"
+                               placeholder="0 - 100" required>
+                    </div>
+
+                </div>
+
+                <p class="help-text">
+                    Passing rule: at least 35 marks in every subject.
+                </p>
+
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">
+                        Register & Calculate Result
+                    </button>
+
+                    <button type="reset" class="btn btn-secondary">
+                        Reset Form
+                    </button>
+                </div>
+
+                <p id="formMessage" class="message" role="status"
+                   aria-live="polite"></p>
+
+            </form>
+        </section>
+
+        <!-- Result of the most recently registered student -->
+        <section class="card" id="resultSection" hidden>
+            <h2>Student Result</h2>
+
+            <div class="result-grid">
+                <div class="result-item">
+                    <span>Student Name</span>
+                    <strong id="resultName">-</strong>
+                </div>
+
+                <div class="result-item">
+                    <span>Roll Number</span>
+                    <strong id="resultRoll">-</strong>
+                </div>
+
+                <div class="result-item">
+                    <span>Total Marks</span>
+                    <strong id="resultTotal">-</strong>
+                </div>
+
+                <div class="result-item">
+                    <span>Percentage</span>
+                    <strong id="resultPercentage">-</strong>
+                </div>
+
+                <div class="result-item">
+                    <span>Final Result</span>
+                    <strong id="resultStatus">-</strong>
+                </div>
+            </div>
+
+            <h3 class="section-heading">Student Object in JSON Format</h3>
+            <pre id="jsonOutput" class="json-output"></pre>
+
+            <button type="button" id="downloadJson"
+                    class="btn btn-secondary">
+                Download Student JSON
+            </button>
+        </section>
+
+        <!-- All registered student records -->
+        <section class="card">
+            <div class="table-heading">
+                <div>
+                    <h2>Registered Students</h2>
+                    <p class="subtitle">
+                        Records are saved in this browser.
+                    </p>
+                </div>
+
+                <button type="button" id="clearAll"
+                        class="btn btn-danger">
+                    Clear All Records
+                </button>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Roll No.</th>
+                            <th>Name</th>
+                            <th>Class</th>
+                            <th>Total / 500</th>
+                            <th>Percentage</th>
+                            <th>Result</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="studentTableBody">
+                        <!-- JavaScript adds student rows here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <p id="emptyMessage" class="empty-message">
+                No students registered yet. Add your first student above.
+            </p>
+
+            <p class="help-text">
+                Note: Records remain in this browser until deleted or
+                browser data is cleared.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>Student Registration & Result Management System</p>
+        <p>Built with HTML5, CSS3, and JavaScript</p>
+    </footer>
+
+</body>
+</html>
